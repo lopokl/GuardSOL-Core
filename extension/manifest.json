@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Solana Address Checker",
+  "version": "2.0",
+  "description": "Перевірка Solana-адрес на ризики (бекенд: Helius + GoPlus + локальний blacklist)",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
