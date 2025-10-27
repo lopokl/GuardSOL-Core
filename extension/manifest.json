@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Solana Address Checker",
+  "name": "GuardSOL",
   "version": "2.0",
   "description": "Перевірка Solana-адрес на ризики (бекенд: Helius + GoPlus + локальний blacklist)",
   "permissions": ["storage"],
