@@ -1,12 +1,12 @@
-// ====== Налаштування ======
-const API_BASE = "http://localhost:8080"; // <- замінити на ваш бекенд, якщо треба
+// ====== Settings ======
+const API_BASE = "http://localhost:8080"; // change if your backend runs elsewhere
 const SAMPLE = [
   "B8Y1dERnVNoUUXeXA4NaCHiB9htcukMSkfHrFsTMHA7h",
   "MszS2N8CT1MV9byX8FKFnrUpkmASSeR5Fmji19ushw1",
   "3RH44Pfx9GtN8ZWoSdWHoxH7HqXAC7V3YcqkX3kDf8J4",
 ];
 
-// ====== UI елменти ======
+// ====== UI element ======
 const addressInput = document.getElementById("addressInput");
 const checkBtn = document.getElementById("checkBtn");
 const runSampleBtn = document.getElementById("runSampleBtn");
@@ -42,7 +42,7 @@ function renderHistory() {
   const items = loadHistory();
   historyDiv.innerHTML = "";
   if (!items.length) {
-    historyDiv.textContent = "Історія порожня.";
+    historyDiv.textContent = "No history yet.";
     return;
   }
   for (const it of items) {
@@ -92,17 +92,17 @@ async function checkViaBackend(address, useGoPlus) {
 // ====== Main check handler ======
 async function handleCheck(address) {
   if (!address) {
-    resultDiv.textContent = "Введіть адресу.";
+    resultDiv.textContent = "Enter the address.";
     return;
   }
-  resultDiv.textContent = `Перевіряємо ${address}...`;
+  resultDiv.textContent = `Checking ${address}...`;
   debugDiv.textContent = "";
 
   const useGoPlus = !!useGoplusCb?.checked;
   const data = await checkViaBackend(address, useGoPlus);
 
   if (!data || !data.ok) {
-    resultDiv.textContent = `Помилка: ${data?.error || "сервер не відповів"}`;
+    resultDiv.textContent = `Error: ${data?.error || "The server did not respond."}`;
     debugDiv.textContent = data?.error ? data.error : "";
     console.error("Check error", data);
     return;
@@ -111,7 +111,7 @@ async function handleCheck(address) {
   // Update UI
   setRiskBadge(data.risk.label, data.risk.score);
   resultDiv.textContent =
-    `Адреса: ${data.address}\nПідсумок: ${data.summary}\n\n=== Деталі ===\n` +
+    `Address: ${data.address}\nResult: ${data.summary}\n\n=== Details ===\n` +
     `${JSON.stringify(data.details, null, 2)}`;
 
   debugDiv.textContent = "";
@@ -128,27 +128,28 @@ async function handleCheck(address) {
 checkBtn.addEventListener("click", async () => {
   const addr = addressInput.value.trim();
   if (!isLikelySolanaAddress(addr)) {
-    resultDiv.textContent = "Увага: адреса не схожа на Solana. Перевірте ввод.";
+    resultDiv.textContent =
+      "Warning: The address does not look like Solana. Check the input.";
   }
   await handleCheck(addr);
 });
 
 runSampleBtn.addEventListener("click", async () => {
-  resultDiv.textContent = "Запуск тестового набору...";
+  resultDiv.textContent = "Running a test suite...";
   for (let i = 0; i < SAMPLE.length; i++) {
     const addr = SAMPLE[i];
-    resultDiv.textContent = `Тест ${i + 1}/${SAMPLE.length}: ${addr}`;
+    resultDiv.textContent = `Test ${i + 1}/${SAMPLE.length}: ${addr}`;
     await handleCheck(addr);
     await new Promise((r) => setTimeout(r, 700));
   }
-  resultDiv.textContent = "Тестовий набір завершено.";
+  resultDiv.textContent = "Test set completed.";
 });
 
 clearHistoryBtn.addEventListener("click", () => {
-  if (!confirm("Очистити історію?")) return;
+  if (!confirm("Clear history?")) return;
   localStorage.removeItem(HISTORY_KEY);
   renderHistory();
-  resultDiv.textContent = "Історія очищена.";
+  resultDiv.textContent = "History cleared.";
   debugDiv.textContent = "";
 });
 
