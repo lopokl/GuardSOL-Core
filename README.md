@@ -49,3 +49,10 @@ Click Load unpacked
 
 Select the folder GuardSOL-extension/extension
 
+🙌 Credits
+
+GoPlus Labs
+
+Helius
+
+Built by GuardSOL initiative using Node.js + Chrome Extension.
