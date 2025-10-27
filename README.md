@@ -38,3 +38,15 @@ It receives data from a separate **backend service** that aggregates information
 ```bash
 git clone https://github.com/lopokl/GuardSOL-extension.git
 cd solana-checker/backend
+
+### 2️⃣🧩 Chrome Extension Setup
+
+Open Chrome → chrome://extensions/
+
+Enable Developer Mode
+
+Click Load unpacked
+
+Select the folder solana-checker/extension
+
+Make sure the backend is running
