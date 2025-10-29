@@ -1,5 +1,5 @@
 // ====== Settings ======
-const API_BASE = "http://localhost:8080"; // change if your backend runs elsewhere
+const API_BASE = "https://api.guard-sol.com"; // change if your backend runs elsewhere
 const SAMPLE = [
   "B8Y1dERnVNoUUXeXA4NaCHiB9htcukMSkfHrFsTMHA7h",
   "MszS2N8CT1MV9byX8FKFnrUpkmASSeR5Fmji19ushw1",
